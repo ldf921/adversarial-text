@@ -4,7 +4,7 @@
 
 Download yelp_review_polarity_csv.tar.gz, amazon_review_polarity_csv.tar.gz to dataset via [http://goo.gl/JyCnZq](http://goo.gl/JyCnZq). Decompress the files.
 
-Download trec07p.tgz to dataset via [https://plg.uwaterloo.ca/~gvcormac/treccorpus07/about.html(https://plg.uwaterloo.ca/~gvcormac/treccorpus07/about.html). Using the notebook dataset/trec_data.ipynb to preprocess the data.
+Download trec07p.tgz to dataset via [https://plg.uwaterloo.ca/~gvcormac/treccorpus07/about.html](https://plg.uwaterloo.ca/~gvcormac/treccorpus07/about.html). Using the notebook dataset/trec_data.ipynb to preprocess the data.
 
 ## Train Model
 ``` bash
