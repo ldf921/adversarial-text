@@ -209,7 +209,7 @@ elif FLAGS.version.startswith('3'):
     net_class = functools.partial(VDCNNV3, optimizer='adam', dropout=0.5)
 
 if FLAGS.action == 'train':
-    x, y = data_util.load_dataset_csv('../data/{}/train.csv'.format(FLAGS.dataset) )    
+    x, y = data_util.load_dataset_csv('dataset/{}/train.csv'.format(FLAGS.dataset) )    
     np.random.seed(10)
     shuffle_indices = np.random.permutation(np.arange(len(y)))
     x_shuffled = x[shuffle_indices]
@@ -247,7 +247,7 @@ if FLAGS.action == 'train':
               snapshot_epoch=True)
     
 elif FLAGS.action in ('test', 'notebook'):
-    x, y = data_util.load_dataset_csv('../data/{}/test.csv'.format(FLAGS.dataset) )    
+    x, y = data_util.load_dataset_csv('dataset/{}/test.csv'.format(FLAGS.dataset) )    
     
     graph = tf.Graph()
     with graph.as_default():

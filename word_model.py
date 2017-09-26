@@ -135,11 +135,11 @@ if FLAGS.action == 'train':
             x_dev = f['x_dev'][:]
             y_dev = f['y_dev'][:]
     else:
-        x, y = data_util.load_dataset_csv_raw('../data/{}/train.csv'.format(FLAGS.dataset) )
+        x, y = data_util.load_dataset_csv_raw('dataset/{}/train.csv'.format(FLAGS.dataset) )
         y = data_util.labels_onehot(y)
         if FLAGS.dataset == 'liar':
             x_train, y_train = x, y
-            x_dev, y_dev = data_util.load_dataset_csv_raw('../data/{}/valid.csv'.format(FLAGS.dataset) )
+            x_dev, y_dev = data_util.load_dataset_csv_raw('dataset/{}/valid.csv'.format(FLAGS.dataset) )
             y_dev = data_util.labels_onehot(y_dev)
         else:
             np.random.seed(10)
@@ -237,7 +237,7 @@ elif FLAGS.action in ('test', 'notebook'):
             x = f['x_test'][:]
             y = f['y_test'][:]
         else:
-            texts, labels = data_util.load_dataset_csv_raw('../data/{}/test.csv'.format(FLAGS.dataset) )    
+            texts, labels = data_util.load_dataset_csv_raw('dataset/{}/test.csv'.format(FLAGS.dataset) )    
             y = data_util.labels_onehot(labels)
             if 'y_test' not in f.keys():
                 dataset_y = f.create_dataset('y_test', shape=y.shape, dtype=np.int32)
