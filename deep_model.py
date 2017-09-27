@@ -2,6 +2,7 @@ import tflearn
 from tflearn import layers
 import tensorflow as tf
 from IPython import embed
+import json
 
 class VDCNN:
     ''' Very Deep CNN for text classification
@@ -188,7 +189,7 @@ parser.add_argument('action', type=str, default='train', help='train|test')
 parser.add_argument('--dataset', type=str, default=None)
 parser.add_argument('--gpu', type=str, default='')
 parser.add_argument('--mem', type=float, default=0.4)
-parser.add_argument('--batch_size', type=int, default=128)
+# parser.add_argument('--batch_size', type=int, default=128)
 parser.add_argument('--checkpoint', type=int, default=None)
 parser.add_argument('--blocks', type=str, default="0,0,0,0")
 parser.add_argument('-v', '--version', type=str, default='1')
@@ -234,10 +235,10 @@ if FLAGS.action == 'train':
                         checkpoint_path='{}/model'.format(model_dir), 
                         max_checkpoints=5)
     
-    if (x_train.shape[0] // 128) > 5000:
-        snapshot_step = 4000
-    else:
-        snapshot_step = None
+    with open('{}/config.json'.format(model_dir), 'w') as fo:
+        json.dump(FLAGS.__dict__, fo, indent=4, sort_keys=True)
+    
+    snapshot_step = min(x_train.shape[0] // 128, 4000)
     model.fit(x_train, y_train, validation_set=(x_dev, y_dev), batch_size=128, 
               n_epoch=10,
               show_metric=True, 

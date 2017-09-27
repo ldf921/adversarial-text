@@ -8,6 +8,7 @@ import data_util
 import json
 import h5py
 from tqdm import tqdm
+import training
 
 class TextCNN:
 
@@ -208,7 +209,8 @@ if FLAGS.action == 'train':
     
     if not os.path.exists(model_dir):
         os.mkdir(model_dir)
-    with open('{}/config.json'.format(model_dir), 'w') as fo:
+    config_file = '{}/config.json'.format(model_dir)
+    with open(config_file, 'w') as fo:
         json.dump(FLAGS.__dict__, fo, indent=4, sort_keys=True)
     timestamp = get_timestamp()
     model = tflearn.DNN(cnn.train_op, 
@@ -223,7 +225,8 @@ if FLAGS.action == 'train':
               snapshot_step=4000,
               show_metric=True, 
               shuffle_all=True, 
-              run_id=timestamp + '_' + FLAGS.tag)
+              run_id=timestamp + '_' + FLAGS.tag,
+              callbacks=[training.ModelSelector(config_file) ] )
     
 elif FLAGS.action in ('test', 'notebook'):
     
