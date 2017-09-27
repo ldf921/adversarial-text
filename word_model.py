@@ -111,12 +111,6 @@ parser.add_argument('--dropout', type=str, default=None)
 parser.add_argument('-n' , '--epochs', type=int, default=10)
 FLAGS = parser.parse_args()
 
-net_args = {
-    'l2_reg_lambda' : FLAGS.decay,
-    'num_filters' : list(map(int, FLAGS.num_filters.split(','))),
-    'dropout' : FLAGS.dropout
-}
-
 os.environ['CUDA_VISIBLE_DEVICES']=FLAGS.gpu
 config = tflearn.config.init_graph(gpu_memory_fraction=FLAGS.mem)
 dataset_name = ''.join([s[0] for s in FLAGS.dataset.split('_')]) if '_' in FLAGS.dataset else FLAGS.dataset
@@ -124,6 +118,11 @@ runs_dir = 'word/runs_{}'.format( dataset_name )
 model_dir = runs_dir + '/' + FLAGS.tag
 
 if FLAGS.action == 'train':
+    net_args = {
+        'l2_reg_lambda' : FLAGS.decay,
+        'num_filters' : list(map(int, FLAGS.num_filters.split(','))),
+        'dropout' : FLAGS.dropout
+    }
     if not os.path.exists(runs_dir):
         os.mkdir(runs_dir)
         
@@ -227,6 +226,19 @@ if FLAGS.action == 'train':
               run_id=timestamp + '_' + FLAGS.tag)
     
 elif FLAGS.action in ('test', 'notebook'):
+    
+    with open('{}/config.json'.format(model_dir), 'r') as fi:
+        cfg = json.load(fi)
+        FLAGS.decay = cfg['decay']
+        FLAGS.num_filters = cfg['num_filters']
+        FLAGS.dropout = cfg['dropout']
+        
+    net_args = {
+        'l2_reg_lambda' : FLAGS.decay,
+        'num_filters' : list(map(int, FLAGS.num_filters.split(','))),
+        'dropout' : FLAGS.dropout
+    }
+    
     vocab_file = '{}/vocab.pkl'.format(runs_dir)
     if os.path.exists(vocab_file):
         with open(vocab_file, 'rb') as fi:
