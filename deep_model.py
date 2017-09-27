@@ -244,7 +244,7 @@ if FLAGS.action == 'train':
               shuffle=True, 
               run_id=timestamp,
               snapshot_step=snapshot_step, 
-              snapshot_epoch=True)
+              snapshot_epoch=False)
     
 elif FLAGS.action in ('test', 'notebook'):
     x, y = data_util.load_dataset_csv('dataset/{}/test.csv'.format(FLAGS.dataset) )    
