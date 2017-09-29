@@ -235,6 +235,7 @@ elif FLAGS.action in ('test', 'notebook'):
         FLAGS.decay = cfg['decay']
         FLAGS.num_filters = cfg['num_filters']
         FLAGS.dropout = cfg['dropout']
+        FLAGS.checkpoint = cfg['checkpoint']
         
     net_args = {
         'l2_reg_lambda' : FLAGS.decay,

@@ -1,16 +1,17 @@
 import tflearn
 import math
 import os
+import json
 
 def update_dict(storage_name, update_dict=None):
     d = dict()
     if os.path.exists(storage_name):
         with open(storage_name, 'r') as f:
-            d = cPickle.load(f)
+            d = json.load(f)
     if update_dict and len(update_dict) > 0:
         d.update(update_dict)
         with open(storage_name, 'w') as f:
-            cPickle.dump(d, f)
+            json.dump(d, f)
     return d
 
 class ModelSelector(tflearn.callbacks.Callback):

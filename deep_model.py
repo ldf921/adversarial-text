@@ -3,6 +3,7 @@ from tflearn import layers
 import tensorflow as tf
 from IPython import embed
 import json
+import training
 
 class VDCNN:
     ''' Very Deep CNN for text classification
@@ -248,6 +249,11 @@ if FLAGS.action == 'train':
               snapshot_epoch=False)
     
 elif FLAGS.action in ('test', 'notebook'):
+    
+    with open('{}/config.json'.format(model_dir), 'r') as fi:
+        cfg = json.load(fi)
+        FLAGS.checkpoint = cfg['checkpoint']
+    
     x, y = data_util.load_dataset_csv('dataset/{}/test.csv'.format(FLAGS.dataset) )    
     
     graph = tf.Graph()
