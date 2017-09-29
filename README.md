@@ -1,5 +1,14 @@
 # adversarial-text
 
+## Prerequisites
+```sh
+pip install gensim
+pip install h5py
+pip install nltk
+```
+
+Download word2vec word embeddings [GoogleNews-vectors-negative300.bin.gz](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing), extract file to GoogleNews-vectors-negative300.bin.
+
 ## Prepare Data
 
 Download yelp_review_polarity_csv.tar.gz, amazon_review_polarity_csv.tar.gz to dataset via [http://goo.gl/JyCnZq](http://goo.gl/JyCnZq). Decompress the files.
