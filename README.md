@@ -25,7 +25,10 @@ Run notebook build_lm.ipynb. You need to specify `KENLM_PATH` to the path of exe
 
 ## Train Model
 ``` bash
-python word_model.py train --dataset amazon_review_polarity_csv --num_filters 300 --decay 2e-4 --tag conv300x1_dc2e4_l200 --gpu 1 --mem 0.5 
-python word_model.py train --dataset trec07p --num_filters 512 --decay 2e-4 --tag lstm-mean --gpu 1 --mem 0.5
-python deep_model.py train --dataset yelp_review_polarity_csv --blocks 1,1,1,1 -v 2-layer9 --gpu 1 --mem 0.5
+python word_model.py train --dataset yelp_review_polarity_csv --num_filters 512 --decay 2e-4 --tag lstm --gpu 1 --mem 0.5
+python word_model.py train --dataset yelp_review_polarity_csv --num_filters 300 --decay 2e-4 --tag conv --gpu 1 --mem 0.5
+python deep_model.py train --dataset yelp_review_polarity_csv --blocks 1,1,1,1 -v 2-layer9
 ```
+
+## Adversarial Generation
+See run_training.ipynb
