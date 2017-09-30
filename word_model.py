@@ -115,6 +115,10 @@ FLAGS = parser.parse_args()
 os.environ['CUDA_VISIBLE_DEVICES']=FLAGS.gpu
 config = tflearn.config.init_graph(gpu_memory_fraction=FLAGS.mem)
 dataset_name = ''.join([s[0] for s in FLAGS.dataset.split('_')]) if '_' in FLAGS.dataset else FLAGS.dataset
+
+if not os.path.exists('word'):
+    os.mkdir('word')
+
 runs_dir = 'word/runs_{}'.format( dataset_name )
 model_dir = runs_dir + '/' + FLAGS.tag
 
