@@ -223,10 +223,13 @@ if FLAGS.action == 'train':
                         checkpoint_path='{}/model'.format(model_dir, FLAGS.tag), 
                         max_checkpoints=10)
     
+    
+    snapshot_step = min(x_train.shape[0] // 128, 4000)
     model.trainer.fit({model.inputs[0]:x_train, model.targets[0]:y_train}, 
               val_feed_dicts={model.inputs[0]:x_dev, model.targets[0]:y_dev}, 
               n_epoch=FLAGS.epochs,
-              snapshot_step=4000,
+              snapshot_step=snapshot_step,
+              snapshot_epoch=False,
               show_metric=True, 
               shuffle_all=True, 
               run_id=timestamp + '_' + FLAGS.tag,

@@ -234,7 +234,7 @@ if FLAGS.action == 'train':
                         tensorboard_verbose=0, 
                         tensorboard_dir='{}/logs'.format(runs_dir), 
                         checkpoint_path='{}/model'.format(model_dir), 
-                        max_checkpoints=5)
+                        max_checkpoints=10)
     
     with open('{}/config.json'.format(model_dir), 'w') as fo:
         json.dump(FLAGS.__dict__, fo, indent=4, sort_keys=True)
